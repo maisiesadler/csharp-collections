@@ -37,4 +37,33 @@ public class HashSetTests
         Assert.True(set.Contains(-7));
         Assert.False(set.Contains(7));
     }
+
+    [Fact]
+    public void CanAddStringsToSet()
+    {
+        var set = new MyHashSet<string>();
+
+        set.Add("no");
+
+        Assert.True(set.Contains("no"));
+        Assert.False(set.Contains("potatoes"));
+    }
+
+    [Fact]
+    public void DoObjectsMakeSenseAsKeys()
+    {
+        var set = new MyHashSet<MyObject>();
+
+        var o1 = new MyObject();
+        var o2 = new MyObject();
+
+        set.Add(o1);
+
+        Assert.True(set.Contains(o1));
+        Assert.False(set.Contains(o2));
+    }
+
+    public class MyObject
+    {
+    }
 }
