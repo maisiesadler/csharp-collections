@@ -20,6 +20,23 @@ public class MyList<T>
         _length++;
     }
 
+    public bool Contains(T value)
+    {
+        foreach (var item in _values)
+        {
+            if (item == null && value == null)
+            {
+                return true;
+            }
+            if (item != null && item.Equals(value))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public int Length => _length;
 
     public T this[int index]

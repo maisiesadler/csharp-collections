@@ -48,6 +48,38 @@ public class ListTests
             Assert.Equal(i, list[i]);
         }
     }
+    [Theory]
+    [InlineData(5)]
+    [InlineData(10)]
+    [InlineData(-12)]
+    public void ListDoesNotContain(int firstItem)
+    {
+        var list = new MyList<int>();
+
+        list.Add(1);
+        list.Add(8);
+        list.Add(27);
+        list.Add(109);
+
+        Assert.False(list.Contains(firstItem));
+    }
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(8)]
+    [InlineData(27)]
+    [InlineData(109)]
+    public void ListContains(int firstItem)
+    {
+        var list = new MyList<int>();
+
+        list.Add(1);
+        list.Add(8);
+        list.Add(27);
+        list.Add(109);
+
+        Assert.True(list.Contains(firstItem));
+    }
 
     [Fact]
     public void ListOfString()
