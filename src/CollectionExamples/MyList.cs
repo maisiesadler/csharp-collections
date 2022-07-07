@@ -2,27 +2,27 @@
 public class MyList<T>
 {
     private int _length = 0;
-    private int[] _values = new int[8];
+    private T[] _values = new T[8];
 
-    public void Add(int number)
+    public void Add(T value)
     {
         if (_length >= _values.Length)
         {
             var temp = _values;
-            _values = new int[_length * 2];
+            _values = new T[_length * 2];
             for (var i = 0; i < temp.Length; i++)
             {
                 _values[i] = temp[i];
             }
         }
 
-        _values[_length] = number;
+        _values[_length] = value;
         _length++;
     }
 
     public int Length => _length;
 
-    public int this[int index]
+    public T this[int index]
     {
         get
         {

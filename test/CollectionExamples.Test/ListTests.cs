@@ -48,4 +48,21 @@ public class ListTests
             Assert.Equal(i, list[i]);
         }
     }
+
+    [Fact]
+    public void ListOfString()
+    {
+        var list = new MyList<string>();
+
+        list.Add("I");
+        list.Add("hope");
+        list.Add("this");
+        list.Add("works");
+
+        Assert.Equal(4, list.Length);
+        Assert.Equal("I", list[0]);
+        Assert.Equal("hope", list[1]);
+        Assert.Equal("this", list[2]);
+        Assert.Equal("works", list[3]);
+    }
 }
