@@ -28,6 +28,16 @@ public class HashSetTests
     }
 
     [Fact]
+    public void CanHandleCollisions()
+    {
+        var set = new MyHashSet<int>();
+
+        set.Add(1);
+
+        Assert.False(set.Contains(9));
+    }
+
+    [Fact]
     public void CanAddNegativeItemToSet()
     {
         var set = new MyHashSet<int>();
