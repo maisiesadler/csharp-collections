@@ -20,6 +20,14 @@ public class MyList<T>
         _length++;
     }
 
+    public IEnumerable<T> Each()
+    {
+        for (var i = 0; i < _length; i++)
+        {
+            yield return _values[i];
+        }
+    }
+
     public bool Contains(T value)
     {
         foreach (var item in _values)

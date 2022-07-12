@@ -12,6 +12,20 @@ public class MyHashSet<T>
         _values[hash].Add(value);
     }
 
+    public IEnumerable<T> Each()
+    {
+        for (var i = 0; i < _size; i++)
+        {
+            var list = _values[i];
+            if (list == null) continue;
+
+            foreach (var item in list.Each())
+            {
+                yield return item;
+            }
+        }
+    }
+
     public bool Contains(T value)
     {
         var hash = GetHashCode(value);

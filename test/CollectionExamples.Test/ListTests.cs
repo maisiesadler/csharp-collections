@@ -97,4 +97,21 @@ public class ListTests
         Assert.Equal("this", list[2]);
         Assert.Equal("works", list[3]);
     }
+
+    [Fact]
+    public void EachReturnsEachItem()
+    {
+        var list = new MyList<int>();
+
+        list.Add(7);
+        list.Add(42);
+        list.Add(904);
+
+        var all = list.Each().ToArray();
+
+        Assert.Equal(3, all.Length);
+        Assert.Equal(7, all[0]);
+        Assert.Equal(42, all[1]);
+        Assert.Equal(904, all[2]);
+    }
 }

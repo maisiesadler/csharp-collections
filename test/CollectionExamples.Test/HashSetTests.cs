@@ -60,6 +60,23 @@ public class HashSetTests
     }
 
     [Fact]
+    public void EachReturnsEachItem()
+    {
+        var set = new MyHashSet<int>();
+
+        set.Add(7);
+        set.Add(42);
+        set.Add(904);
+
+        var all = set.Each().ToArray();
+
+        Assert.Equal(3, all.Length);
+        Assert.Equal(7, all[0]);
+        Assert.Equal(42, all[1]);
+        Assert.Equal(904, all[2]);
+    }
+
+    [Fact]
     public void DoObjectsMakeSenseAsKeys()
     {
         var set = new MyHashSet<MyObject>();
