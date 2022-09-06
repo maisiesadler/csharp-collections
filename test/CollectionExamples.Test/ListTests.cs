@@ -48,7 +48,26 @@ public class ListTests
             Assert.Equal(i, list[i]);
         }
     }
+
+    [Fact]
+    public void EachReturnsEachItem()
+    {
+        var list = new MyList<int>();
+
+        list.Add(7);
+        list.Add(42);
+        list.Add(904);
+
+        var all = list.Each().ToArray();
+
+        Assert.Equal(3, all.Length);
+        Assert.Equal(7, all[0]);
+        Assert.Equal(42, all[1]);
+        Assert.Equal(904, all[2]);
+    }
+
     [Theory]
+    [InlineData(0)]
     [InlineData(5)]
     [InlineData(10)]
     [InlineData(-12)]
@@ -81,37 +100,20 @@ public class ListTests
         Assert.True(list.Contains(firstItem));
     }
 
-    [Fact]
-    public void ListOfString()
-    {
-        var list = new MyList<string>();
+    // [Fact]
+    // public void ListOfString()
+    // {
+    //     var list = new MyList<string>();
 
-        list.Add("I");
-        list.Add("hope");
-        list.Add("this");
-        list.Add("works");
+    //     list.Add("I");
+    //     list.Add("hope");
+    //     list.Add("this");
+    //     list.Add("works");
 
-        Assert.Equal(4, list.Length);
-        Assert.Equal("I", list[0]);
-        Assert.Equal("hope", list[1]);
-        Assert.Equal("this", list[2]);
-        Assert.Equal("works", list[3]);
-    }
-
-    [Fact]
-    public void EachReturnsEachItem()
-    {
-        var list = new MyList<int>();
-
-        list.Add(7);
-        list.Add(42);
-        list.Add(904);
-
-        var all = list.Each().ToArray();
-
-        Assert.Equal(3, all.Length);
-        Assert.Equal(7, all[0]);
-        Assert.Equal(42, all[1]);
-        Assert.Equal(904, all[2]);
-    }
+    //     Assert.Equal(4, list.Length);
+    //     Assert.Equal("I", list[0]);
+    //     Assert.Equal("hope", list[1]);
+    //     Assert.Equal("this", list[2]);
+    //     Assert.Equal("works", list[3]);
+    // }
 }

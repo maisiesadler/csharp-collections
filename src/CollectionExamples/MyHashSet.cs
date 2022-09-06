@@ -1,49 +1,46 @@
 ﻿namespace CollectionExamples;
+
 public class MyHashSet<T>
 {
-    private const int _size = 1000;
-    private MyList<T>[] _values = new MyList<T>[_size];
+    private MyList<T>[] _values = new MyList<T>[8];
+
+    public bool Contains(T value)
+    {
+        var bucket = GetBucket(value);
+
+        var list = _values[bucket];
+        if (list == null) return false;
+
+        return list.Contains(value);
+    }
 
     public void Add(T value)
     {
-        var hash = GetHashCode(value);
+        var bucket = GetBucket(value);
 
-        if (_values[hash] == null) _values[hash] = new MyList<T>();
-        _values[hash].Add(value);
+        if (_values[bucket] == null)
+            _values[bucket] = new MyList<T>();
+
+        _values[bucket].Add(value);
     }
 
     public IEnumerable<T> Each()
     {
-        for (var i = 0; i < _size; i++)
+        foreach (var list in _values)
         {
-            var list = _values[i];
-            if (list == null) continue;
-
-            foreach (var item in list.Each())
+            if (list != null)
             {
-                yield return item;
+                foreach (var value in list.Each())
+                {
+                    yield return value;
+                }
             }
         }
     }
 
-    public bool Contains(T value)
+    private int GetBucket(T value)
     {
-        var hash = GetHashCode(value);
-
-        if (_values[hash] == null) return false;
-
-        var values = _values[hash];
-        return values.Contains(value);
-    }
-
-    private static int GetHashCode(T value)
-    {
-        if (value == null) throw new ArgumentNullException(nameof(value));
-
-        var hash = value.GetHashCode();
-        hash = Math.Abs(hash);
-        hash = hash % _size;
-
-        return hash;
+        var hashcode = value.GetHashCode();
+        return hashcode % 8;
     }
 }
